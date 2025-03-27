@@ -1,7 +1,6 @@
 package com.spring_car.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring_car.dto.CarDto;
 
 import jakarta.persistence.Entity;
@@ -23,7 +22,6 @@ public class Car {
     private String color;
     private String registrationPlate;
 
-    @JsonIgnore
     private Long idClient;
 
     @ManyToOne
@@ -34,13 +32,14 @@ public class Car {
     public Car() {
     }
 
-    public Car(Long id, String model, String brand, int year, String color, String registrationPlate, Client client) {
+    public Car(Long id, String model, String brand, int year, String color, String registrationPlate, Long idClient, Client client) {
         this.id = id;
         this.model = model;
         this.brand = brand;
         this.year = year;
         this.color = color;
         this.registrationPlate = registrationPlate;
+        this.idClient = idClient;
         this.client = client;
     }
 

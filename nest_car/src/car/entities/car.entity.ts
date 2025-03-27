@@ -24,7 +24,6 @@ export class Car {
     registrationPlate: string;
 
     @Column({nullable: false})
-    @Exclude()
     idClient: number;
 
     @ManyToOne(() => Client, (client) => client.cars, { onDelete: 'CASCADE', eager: false })
