@@ -9,6 +9,13 @@ from .models import Client
 @api_view(['GET', 'PUT', 'DELETE'])
 def get_by_id(request, id):
 
+    if request.method == 'DELETE':
+        try:
+            Client.objects.filter(id=id).delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
     try:
         client = Client.objects.get(pk=id)
     except:
@@ -24,14 +31,6 @@ def get_by_id(request, id):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
-    
-    if request.method == 'DELETE':
-        try:
-            client.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except:
-            return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 @api_view(['GET','POST'])
 def client_manager(request):

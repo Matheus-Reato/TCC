@@ -8,6 +8,13 @@ from .serializers import CarSerializer
 @api_view(['GET', 'PUT', 'DELETE'])
 def get_by_id(request, id):
 
+    if request.method == 'DELETE':
+        try:
+            Car.objects.filter(id=id).delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
     try:
         car = Car.objects.get(pk=id)
     except:
@@ -23,14 +30,6 @@ def get_by_id(request, id):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
-    
-    if request.method == 'DELETE':
-        try:
-            car.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except:
-            return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 @api_view(['GET','POST'])
 def car_manager(request):

@@ -26,7 +26,7 @@ public class CarService {
     }
 
     public List<Car> getAllCars() {
-        return carRepository.findAll();
+        return carRepository.findAllByOrderByIdAsc();
     }
 
     public Car getCarById(Long id){

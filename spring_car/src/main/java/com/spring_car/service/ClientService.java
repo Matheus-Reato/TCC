@@ -21,7 +21,7 @@ public class ClientService {
     }
 
     public List<Client> getAllClients() {
-        return clientRepository.findAll();
+        return clientRepository.findAllByOrderByIdAsc();
     }
 
     public Client getClientById(Long id){
